@@ -10,6 +10,8 @@ public class FripperController : MonoBehaviour {
 	//弾いた時の傾き
 	private float flickAngle = -20;
 
+	private int xsize = 354;
+
 	// Use this for initialization
 	void Start () {
 		//HinjiJointコンポーネント取得
@@ -21,6 +23,25 @@ public class FripperController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+		//画面左をクリック時左フリッパーを動かす
+		if (Input.GetMouseButtonDown (0) && tag == "LeftFripperTag") {
+			if (Input.mousePosition.x < (xsize/2) ) {
+				SetAngle (this.flickAngle);
+			}
+		}
+
+		//画面右をクリック時右フリッパーを動かす
+		if (Input.GetMouseButtonDown (0) && tag == "RightFripperTag") {
+			if (Input.mousePosition.x >= (xsize/2) ) {
+				SetAngle (this.flickAngle);
+			}
+		}
+
+		//矢印キー離された時フリッパーを元に戻す
+		if (Input.GetMouseButtonUp (0)) {
+			SetAngle (this.defaultAngle);
+		}
 
 		//左矢印キーを押した時左フリッパーを動かす
 		if (Input.GetKeyDown(KeyCode.LeftArrow) && tag == "LeftFripperTag") {
